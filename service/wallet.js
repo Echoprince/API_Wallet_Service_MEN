@@ -1,11 +1,5 @@
-/* -------------------------------------------------------------------------- */
-/*                              external imports                              */
-/* -------------------------------------------------------------------------- */
 const AsyncLock = require('async-lock');
-
 const lock = new AsyncLock();
-
-/* ---------------------------- internal imports ---------------------------- */
 const logger = require('../lib/logger');
 const { throwError } = require('../utils/error');
 const Wallet = require('../model/wallet')
@@ -14,7 +8,6 @@ const Wallet = require('../model/wallet')
 const createWallet = (userId) => {
     return Wallet.findOne({user: userId})
     .then(wallet => {
-        console.log('userId', userId)
         if (wallet) return wallet
         const newWallet = new Wallet({
             user: userId , 
@@ -82,7 +75,6 @@ const getWalletBalance = (userId) => {
  * @param userId
  * @param args
  *
- * @returns accountDetails - Object
  */
 const initiateTransaction = (userId, args) => lock.acquire(userId, () => {
   const { type, amount } = args;
