@@ -25,6 +25,7 @@ const PORT = process.env.PORT || 8080
 //initialize connection to Database
 connectDB()
 
+//Register All Routes
 app.use('/auth', require('./routes/auth'))
 app.use('/wallet', require('./routes/wallet'))
 
